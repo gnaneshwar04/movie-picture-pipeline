@@ -16,6 +16,7 @@ jobs:
     defaults:
       run:
         working-directory: starter/frontend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.14'
-      
+
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
@@ -42,12 +43,14 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+
   test:
     name: Test Frontend
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: starter/frontend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,10 +71,14 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
+      - name: Install react-scripts
+        run: npm install react-scripts@5.0.1 --no-save
+
       - name: Run Tests
-        run: npx --yes react-scripts@5.0.1 test --transformIgnorePatterns --watchAll=false
+        run: npm run test -- --watchAll=false
         env:
           CI: true
+
 
   build:
     name: Build Docker Image
@@ -80,6 +87,7 @@ jobs:
     defaults:
       run:
         working-directory: starter/frontend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -88,7 +96,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.14'
-        
+
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
@@ -100,8 +108,11 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
+      - name: Install react-scripts
+        run: npm install react-scripts@5.0.1 --no-save
+
       - name: Run Tests
-        run: npx --yes react-scripts@5.0.1 test --transformIgnorePatterns --watchAll=false
+        run: npm run test -- --watchAll=false
         env:
           CI: true
 
