@@ -24,6 +24,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.14'
+      
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm install --force
@@ -49,6 +57,14 @@ jobs:
         with:
           node-version: '18.14'
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install --force
 
@@ -72,6 +88,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.14'
+        
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Run Tests
+        run: npm run test -- --watchAll=false
+        env:
+          CI: true
 
       - name: Build Docker Image
         run: |
