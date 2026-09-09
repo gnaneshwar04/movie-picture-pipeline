@@ -15,8 +15,7 @@ RUN npm install --force
 COPY . .
 
 # Build the app
-ENV PATH=/app/node_modules/.bin:$PATH
-RUN npm run build
+RUN node node_modules/react-scripts/bin/react-scripts.js build
 
 # Expose the port used by the React app
 EXPOSE 3000
