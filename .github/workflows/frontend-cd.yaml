@@ -31,7 +31,7 @@ jobs:
           node-version: '18.14'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Install compatible prettier
         run: npm install prettier@^2.0.0 --no-save
@@ -55,7 +55,7 @@ jobs:
           node-version: '18.14'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Run Tests
         run: ./node_modules/.bin/react-scripts test --transformIgnorePatterns --watchAll=false
