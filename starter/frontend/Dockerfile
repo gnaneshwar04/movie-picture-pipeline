@@ -2,6 +2,7 @@ FROM  public.ecr.aws/docker/library/node:18.14.2-alpine3.17
 
 ARG REACT_APP_MOVIE_API_URL
 ENV REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL}
+ENV DISABLE_ESLINT_PLUGIN=true
 
 WORKDIR /app
 
@@ -15,7 +16,6 @@ RUN npm ci
 COPY . .
 
 # Build the app
-RUN npm install -g react-scripts@5.0.1
 RUN npm run build
 
 # Expose the port used by the React app
