@@ -11,7 +11,7 @@ COPY package*.json ./
 
 # Install packages
 RUN npm ci
-
+RUN npm install react-scripts@5.0.1 --no-save
 # Copy code
 COPY . .
 
