@@ -15,6 +15,7 @@ RUN npm ci
 COPY . .
 
 # Build the app
+RUN npm install -g react-scripts@5.0.1
 RUN npm run build
 
 # Expose the port used by the React app
