@@ -9,12 +9,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install packages
-RUN npm ci
+RUN npm install --force
 
 # Copy code
 COPY . .
 
 # Build the app
+ENV PATH=/app/node_modules/.bin:$PATH
 RUN npm run build
 
 # Expose the port used by the React app
