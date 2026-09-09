@@ -35,3 +35,5 @@ test('calls onMovieClick when movie is clicked', async () => {
 
   expect(onMovieClick).toHaveBeenCalledWith(mockMovies[0]);
 });
+
+this is intentionally invalid javascript
