@@ -9,13 +9,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install packages
-RUN npm install --force
+RUN npm ci
 
 # Copy code
 COPY . .
 
 # Build the app
-RUN node node_modules/react-scripts/bin/react-scripts.js build
+RUN npm run build
 
 # Expose the port used by the React app
 EXPOSE 3000
