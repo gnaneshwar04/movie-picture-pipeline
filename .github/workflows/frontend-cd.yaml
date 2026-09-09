@@ -33,8 +33,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install prettier
-        run: npm install prettier --no-save
+      - name: Install compatible prettier
+        run: npm install prettier@^2.0.0 --no-save
 
       - name: Run ESLint
         run: npm run lint
@@ -58,7 +58,7 @@ jobs:
         run: npm install
 
       - name: Run Tests
-        run: npm test -- --watchAll=false
+        run: ./node_modules/.bin/react-scripts test --transformIgnorePatterns --watchAll=false
         env:
           CI: true
 
