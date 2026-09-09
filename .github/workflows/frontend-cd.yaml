@@ -23,10 +23,10 @@ jobs:
         working-directory: starter/frontend
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18.14'
 
@@ -47,10 +47,10 @@ jobs:
         working-directory: starter/frontend
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18.14'
 
@@ -58,7 +58,7 @@ jobs:
         run: npm install --force
 
       - name: Run Tests
-        run: ./node_modules/.bin/react-scripts test --transformIgnorePatterns --watchAll=false
+        run: npx --yes react-scripts@5.0.1 test --transformIgnorePatterns --watchAll=false
         env:
           CI: true
 
@@ -71,7 +71,7 @@ jobs:
         working-directory: starter/frontend
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -101,7 +101,7 @@ jobs:
     needs: [build]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
