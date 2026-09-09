@@ -101,7 +101,7 @@ jobs:
         run: npm install --force
 
       - name: Run Tests
-        run: npm run test -- --watchAll=false
+        run: npx --yes react-scripts@5.0.1 test --transformIgnorePatterns --watchAll=false
         env:
           CI: true
 
