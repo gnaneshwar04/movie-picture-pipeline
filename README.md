@@ -407,6 +407,58 @@ kustomize edit set image backend=<ECR_REPO_URL>:<NEW_TAG_HERE>
 kustomize build | kubectl apply -f -
 ```
 
+
+## Frontend Continuous Deployment Verification
+
+The frontend application is deployed to an Amazon EKS cluster using GitHub Actions.
+
+The Frontend Continuous Deployment workflow:
+
+- Runs frontend linting and tests.
+- Builds the Docker image only after linting and testing complete successfully using the `needs` directive.
+- Passes `REACT_APP_MOVIE_API_URL` as a Docker build argument.
+- Authenticates to Amazon ECR using GitHub Secrets and `aws-actions/amazon-ecr-login`.
+- Pushes the frontend Docker image to Amazon ECR.
+- Deploys the frontend application to Amazon EKS using `kubectl`.
+- Runs automatically on pushes/merges to the `main` branch.
+- Supports manual execution using `workflow_dispatch`.
+
+### Working Frontend Application
+
+The following screenshot verifies that the frontend is accessible through its LoadBalancer DNS and successfully retrieves the movie list from the backend.
+
+![Working Frontend Application](screenshots/frontend-working.png)
+
+### Kubernetes Resources
+
+The following output verifies that the frontend and backend pods, services, deployments, and replica sets are running in the EKS cluster.
+
+![kubectl get all](screenshots/kubectl-get-all.png)
+
+### Frontend Deployment Details
+
+The deployment description verifies that the frontend deployment is available, uses the image from Amazon ECR, and has `REACT_APP_MOVIE_API_URL` configured.
+
+![Frontend Deployment Description](screenshots/frontend-deployment-description.png)
+
+### Amazon ECR Frontend Image
+
+The following screenshot verifies that the frontend Docker image was successfully pushed to the Amazon ECR frontend repository.
+
+![Frontend ECR Image](screenshots/frontend-ecr-image.png)
+
+### Successful Frontend CD Workflow
+
+The following screenshot verifies that the Frontend Continuous Deployment workflow completed successfully.
+
+![Frontend CD Success](screenshots/frontend-cd-success.png)
+
+### CI Failure Handling
+
+The following screenshot demonstrates that when CI checks fail, the Docker build does not proceed.
+
+![Frontend CI Failure Test](screenshots/frontend-ci-failure-test.png)
+
 ## License
 
 [License](LICENSE.md)
